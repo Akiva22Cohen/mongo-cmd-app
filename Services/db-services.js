@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const TicketModel = require("./Ticket");
+const TicketModel = require("../models/Ticket");
 require("dotenv").config(); // כדי לטעון משתנים מ-.env
 
 const connectDB = async () => {
