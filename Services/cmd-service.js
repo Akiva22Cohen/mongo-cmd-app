@@ -7,6 +7,12 @@ const {
   updateTicket,
   deleteTicket,
 } = require("./db-services");
+const Table = require("cli-table");
+
+const table = new Table({
+  head: ["#", "Name", "Subject", "Is Open", "Waiting Hours"],
+  colWidths: [5, 20, 20, 10, 15], // הגדרת רוחב העמודות
+});
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -19,7 +25,11 @@ const prompt = (question) =>
 const mainMenu = async () => {
   console.log("\n=== Ticket Management ===");
   const tickets = await getAllTickets();
-  console.table(tickets.map((t, i) => t.toObject()));
+  tickets.forEach((t, i) => {
+    table.push([i + 1, t.name, t.subject, t.isOpen, t.waitingHours]);
+  });
+
+  console.log(table.toString());
 
   console.log("1. Add Ticket");
   console.log("2. Update Ticket");
@@ -59,7 +69,7 @@ const addNewTicket = async () => {
 
 const updateExistingTicket = async () => {
   const tickets = await getAllTickets();
-  const index = parseInt(await prompt("Enter ticket index to update: "), 10);
+  const index = parseInt(await prompt("Enter ticket index to update: "), 10) - 1;
 
   if (index < 0 || index >= tickets.length) {
     console.log("Invalid index.");
@@ -91,7 +101,7 @@ const updateExistingTicket = async () => {
 const deleteExistingTicket = async () => {
   try {
     const tickets = await getAllTickets();
-    const index = parseInt(await prompt("Enter ticket index to delete: "), 10);
+    const index = parseInt(await prompt("Enter ticket index to delete: "), 10) - 1;
 
     if (index < 0 || index >= tickets.length) {
       console.log("Invalid index.");
