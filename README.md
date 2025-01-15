@@ -20,7 +20,7 @@
 
 1. 🌀 Clone this repo:
    ```bash
-   git clone https://github.com/your-username/mongo-cmd-app.git
+   git clone https://github.com/Akiva22Cohen/mongo-cmd-app.git
    ```
 2. 📂 Go to the project folder:
    ```bash
