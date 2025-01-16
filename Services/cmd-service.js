@@ -9,11 +9,6 @@ const {
 } = require("./db-services");
 const Table = require("cli-table");
 
-const table = new Table({
-  head: ["#", "Name", "Subject", "Is Open", "Waiting Hours"],
-  colWidths: [5, 20, 20, 10, 15], // הגדרת רוחב העמודות
-});
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -25,6 +20,12 @@ const prompt = (question) =>
 const mainMenu = async () => {
   console.log("\n=== Ticket Management ===");
   const tickets = await getAllTickets();
+
+  const table = new Table({
+    head: ["#", "Name", "Subject", "Is Open", "Waiting Hours"],
+    colWidths: [5, 20, 20, 10, 15], // הגדרת רוחב העמודות
+  });
+
   tickets.forEach((t, i) => {
     table.push([i + 1, t.name, t.subject, t.isOpen, t.waitingHours]);
   });
