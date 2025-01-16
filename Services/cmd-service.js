@@ -69,7 +69,8 @@ const addNewTicket = async () => {
 
 const updateExistingTicket = async () => {
   const tickets = await getAllTickets();
-  const index = parseInt(await prompt("Enter ticket index to update: "), 10) - 1;
+  const index =
+    parseInt(await prompt("Enter ticket index to update: "), 10) - 1;
 
   if (index < 0 || index >= tickets.length) {
     console.log("Invalid index.");
@@ -101,7 +102,8 @@ const updateExistingTicket = async () => {
 const deleteExistingTicket = async () => {
   try {
     const tickets = await getAllTickets();
-    const index = parseInt(await prompt("Enter ticket index to delete: "), 10) - 1;
+    const index =
+      parseInt(await prompt("Enter ticket index to delete: "), 10) - 1;
 
     if (index < 0 || index >= tickets.length) {
       console.log("Invalid index.");
